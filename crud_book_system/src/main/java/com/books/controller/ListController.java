@@ -17,9 +17,8 @@ public class ListController implements BookController {
 		System.out.println("도서 목록 조회");
 		List<Book> bookList = bs.getBookList();
 		
-		for (Book book: bookList) {
-			System.out.println(book);
-		}
+		req.setAttribute("bookList", bookList);
+		req.getRequestDispatcher("/WEB-INF/views/BookList.jsp").forward(req, res);
 	}
 
 }

@@ -28,6 +28,8 @@ public class BookDAOImpl implements BookDAO {
 					rs.getString("writerName"),
 					rs.getString("genre"),
 					rs.getString("publisher"),
+					rs.getString("summary"),
+					rs.getInt("price"),
 					rs.getInt("totalPages"),
 					rs.getString("publishedAt")
 				);

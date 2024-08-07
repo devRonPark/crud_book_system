@@ -1,0 +1,135 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>도서 목록</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<style>
+.card-img-top {
+	height: 200px;
+	object-fit: cover;
+}
+
+.filter-container {
+	margin-bottom: 20px;
+}
+
+.btn-add-book {
+	margin-bottom: 20px;
+}
+
+.no-books-msg {
+	text-align: center;
+	margin-top: 50px;
+}
+
+@media ( min-width : 576px) {
+	.container {
+		max-width: 960px;
+	}
+}
+
+@media ( min-width : 992px) {
+	.container {
+		max-width: 1140px;
+	}
+}
+
+.pagination {
+	justify-content: center;
+	margin-top: 20px;
+}
+</style>
+</head>
+<body>
+	<div class="container mt-4">
+		<!-- 도서 등록 버튼 -->
+		<div class="d-flex justify-content-end mb-3">
+			<a href="registerBook.jsp" class="btn btn-primary btn-add-book">도서
+				등록</a>
+		</div>
+
+		<!-- 검색 및 필터 -->
+		<div
+			class="filter-container d-flex flex-column flex-sm-row justify-content-between align-items-center mb-4">
+			<form class="d-flex w-100 w-sm-50">
+				<input class="form-control me-2" type="search" placeholder="검색어 입력"
+					aria-label="Search">
+				<button class="btn btn-outline-success" type="submit">검색</button>
+			</form>
+			<div class="d-flex mt-3 mt-sm-0">
+				<select class="form-select ms-2" aria-label="Default select example">
+					<option selected>필터 선택</option>
+					<option value="1">가격 낮은 순</option>
+					<option value="2">가격 높은 순</option>
+					<option value="3">출판일 최신 순</option>
+				</select>
+			</div>
+		</div>
+
+		<!-- 도서 목록 카드 -->
+		<div class="row">
+			<c:choose>
+				<c:when test="${not empty bookList}">
+					<c:forEach var="book" items="${bookList}">
+						<div class="col-12 mb-4">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">${book.getTitle()}</h5>
+									<p class="card-text">
+										<strong>작가:</strong> ${book.getWriterName()}
+									</p>
+									<p class="card-text">
+										<strong>출판사:</strong> ${book.getPublisher()}
+									</p>
+									<p class="card-text">
+										<strong>가격:</strong> ${book.getPrice()}원
+									</p>
+									<c:if test="${book.getSummary() != null}">
+										<p class="card-text">
+											<strong>내용:</strong> ${book.getSummary()}
+										</p>
+									</c:if>
+									<a href="/books?id=${book.getId()}" class="btn btn-primary">자세히
+										보기</a>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div class="no-books-msg">
+						<p>등록된 도서가 없습니다.</p>
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</div>
+
+		<!-- 페이징 컴포넌트 -->
+		<nav aria-label="Page navigation">
+			<ul class="pagination">
+				<li class="page-item <c:if test="${page == 1}">disabled</c:if>">
+					<a class="page-link" href="?page=${page - 1}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+				</a>
+				</li>
+				<c:forEach var="i" begin="1" end="${totalPages}">
+					<li class="page-item <c:if test="${i == page}">active</c:if>">
+						<a class="page-link" href="?page=${i}">${i}</a>
+					</li>
+				</c:forEach>
+				<li
+					class="page-item <c:if test="${page == totalPages}">disabled</c:if>">
+					<a class="page-link" href="?page=${page + 1}" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+				</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</body>
+</html>
