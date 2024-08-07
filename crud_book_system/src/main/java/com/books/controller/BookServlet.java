@@ -40,7 +40,11 @@ public class BookServlet extends HttpServlet {
 		}
 		
 		// 매핑된 컨트롤러의 process 메서드를 호출하여 요청을 처리.
-		controller.process(req, res);
+		try {
+			controller.process(req, res);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
