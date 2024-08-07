@@ -13,12 +13,34 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/books/*")
 public class BookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Map<String, BookController> controllerMap = new HashMap<>();
        
     public BookServlet() {
-        
+        controllerMap.put("/books/list", new ListController());
+        controllerMap.put("/books.add", new AddController());
+        controllerMap.put("/books/edit", new EditController());
+        controllerMap.put("/books/delete", new DeleteController());
+        controllerMap.put("/books/view", new ViewController());
     }
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        // 요청 인코딩을 UTF-8로 설정합니다.
+        req.setCharacterEncoding("utf-8");
+        
+        // 요청 URI를 가져온다.
+		String requestURI = req.getRequestURI();
+		
+		// 요청 URI에 매핑된 컨트롤러를 가져온다.
+		BookController controller = controllerMap.get(requestURI);
+		
+		// 요청 URI와 매핑된 컨트롤러가 없다면, 404 상태 코드를 설정.
+		if (controller == null) {
+			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return;
+		}
+		
+		// 매핑된 컨트롤러의 process 메서드를 호출하여 요청을 처리.
+		controller.process(req, res);
 	}
 
 }
