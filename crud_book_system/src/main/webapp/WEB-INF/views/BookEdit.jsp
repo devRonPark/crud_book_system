@@ -131,11 +131,10 @@ s</style>
                 <div class="invalid-feedback">출판사를 입력해 주세요.</div>
             </div>
             <div class="mb-3">
-                <label for="summary" class="form-label">주요 내용</label>
-                <textarea class="form-control" id="summary" name="summary" rows="4">${book.getSummary()}</textarea>
-                <div class="invalid-feedback">주요 내용을 입력해 주세요.</div>
-            </div>
-            <div class="mb-3">
+            	<label for="publishedAt" class="form-label">출판일</label>
+            	<input type="date" class="form-control" id="publishedAt" name="publishedAt" value="${book.getPublishedAt().toString()}">
+        	</div>
+        	<div class="mb-3">
                 <label for="price" class="form-label">가격</label>
                 <input type="number" class="form-control" id="price" name="price" min="0" step="10" value="${book.getPrice()}">
                 <div class="invalid-feedback">올바른 가격을 입력해 주세요.</div>
@@ -145,6 +144,12 @@ s</style>
                 <input type="number" class="form-control" id="totalPages" name="totalPages" min="1" value="${book.getTotalPages()}">
                 <div class="invalid-feedback">총 페이지 수를 입력해 주세요.</div>
             </div>
+            <div class="mb-3">
+                <label for="summary" class="form-label">주요 내용</label>
+                <textarea class="form-control" id="summary" name="summary" rows="4">${book.getSummary()}</textarea>
+                <div class="invalid-feedback">주요 내용을 입력해 주세요.</div>
+            </div>
+            
 			<button type="submit" class="btn btn-primary w-100">수정하기</button>
 		</form>
 

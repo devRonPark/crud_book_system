@@ -65,7 +65,8 @@ window.addEventListener("DOMContentLoaded", () => {
 				publisher: form.publisher.value.trim() != "" ? form.publisher.value.trim() : null,
 				summary: form.summary.value.trim() != "" ? form.summary.value.trim() : null,
 				price: parseInt(form.price.value.trim()) > 0 ? parseInt(form.price.value.trim()) : 0,
-				totalPages: parseInt(form.totalPages.value.trim())
+				totalPages: parseInt(form.totalPages.value.trim()),
+				publishedAt: form.publishedAt.value
 			}
 			
 			axios.post(postReqURL, formData, { headers: {

@@ -26,7 +26,6 @@ public class EditController implements BookController {
 			req.getRequestDispatcher("/WEB-INF/views/BookEdit.jsp").forward(req, res);
 		} else if (reqMethod.equals("POST")) {
 			bs.editBook(req);
-//			res.sendRedirect("/books/view?id=" + bookId);
 			return;
 		}
 		

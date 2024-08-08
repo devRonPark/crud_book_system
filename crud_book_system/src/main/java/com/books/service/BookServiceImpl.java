@@ -1,6 +1,7 @@
 package com.books.service;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,6 +62,8 @@ public class BookServiceImpl implements BookService {
 		String summary = req.getParameter("summary") != null ? req.getParameter("summary") : null;
 		int price = Integer.parseInt(req.getParameter("price"));
 		int totalPages = Integer.parseInt(req.getParameter("totalPages"));
+		// LocalDate.parse() 메소드: convert from string to localdate
+		LocalDate publishedAt = LocalDate.parse(req.getParameter("publishedAt"));
 		
 		book.setTitle(title);
 		book.setWriterName(writerName);
@@ -69,6 +72,7 @@ public class BookServiceImpl implements BookService {
 		book.setSummary(summary);
 		book.setPrice(price);
 		book.setTotalPages(totalPages);
+		book.setPublishedAt(publishedAt);
 		
 		int resultRow = bookDAO.update(book);
 		if (resultRow <= 0) throw new SQLException("책 정보 업데이트 실패");

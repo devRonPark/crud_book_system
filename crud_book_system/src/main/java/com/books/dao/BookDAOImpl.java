@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.books.model.Book;
 import com.books.util.ConnectionPool;
-import com.books.util.TimestampConverter;
+import com.books.util.TypeConverter;
 
 public class BookDAOImpl implements BookDAO {
 
@@ -32,7 +32,7 @@ public class BookDAOImpl implements BookDAO {
 					rs.getString("summary"),
 					rs.getInt("price"),
 					rs.getInt("totalPages"),
-					TimestampConverter.toLocalDate(rs.getTimestamp("publishedAt"))
+					TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt"))
 				);
 				bookList.add(book);
 			}
@@ -79,7 +79,7 @@ public class BookDAOImpl implements BookDAO {
 						rs.getString("summary"),
 						rs.getInt("price"),
 						rs.getInt("totalPages"),
-						TimestampConverter.toLocalDate(rs.getTimestamp("publishedAt"))
+						TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt"))
 					);
 					return book;
 				}
@@ -90,7 +90,7 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public int update(Book book) throws SQLException {
-		String sql = "UPDATE books SET title = ?, writerName = ?, genre = ?, publisher = ?, summary = ?, price = ?, totalPages = ? WHERE id = ?";
+		String sql = "UPDATE books SET title = ?, writerName = ?, genre = ?, publisher = ?, summary = ?, price = ?, totalPages = ?, publishedAt = ? WHERE id = ?";
 		try (
 			Connection conn = ConnectionPool.DBPool.getDBPool();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -102,7 +102,8 @@ public class BookDAOImpl implements BookDAO {
 			pstmt.setString(5, book.getSummary());
 			pstmt.setInt(6, book.getPrice());
 			pstmt.setInt(7, book.getTotalPages());
-			pstmt.setInt(8, book.getId());
+			pstmt.setTimestamp(8, TypeConverter.localDateToTimestamp(book.getPublishedAt()));
+			pstmt.setInt(9, book.getId());
 			
 			return pstmt.executeUpdate();
 		}
