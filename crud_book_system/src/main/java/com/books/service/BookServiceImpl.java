@@ -32,5 +32,16 @@ public class BookServiceImpl implements BookService {
 		int resultRow = bookDAO.insert(newBook);
 		if (resultRow <= 0) throw new SQLException("새로운 책 추가 실패");
 	}
+	
+	@Override
+	public Book getBookDetail(HttpServletRequest req) throws Exception {
+		int bookId = Integer.parseInt(req.getParameter("id"));
+		// id parameter 에 대한 유효성 검사
+		if (bookId < 0) throw new Exception("id is invalid value");
+		Book book = bookDAO.findByID(bookId);
+		book.setPublishedAt(book.getPublishedAt().substring(0, 10).replace("-", ". "));
+		
+		return book;
+	}
 
 }

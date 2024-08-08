@@ -16,6 +16,7 @@
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
 <style>
+<<<<<<< HEAD
 body {
 	padding-top: 70px; /* 네비게이션 바 높이만큼 패딩 추가 */
 }
@@ -26,6 +27,15 @@ body {
 	width: 100%;
 	z-index: 1000;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+=======
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+>>>>>>> feat/bookDetail
 }
 
 .card-img-top {
@@ -129,7 +139,7 @@ body {
 											<strong>내용:</strong> ${book.getSummary()}
 										</p>
 									</c:if>
-									<a href="/books?id=${book.getId()}" class="btn btn-primary">자세히
+									<a href="/books/view?id=${book.getId()}" class="btn btn-primary">자세히
 										보기</a>
 								</div>
 							</div>

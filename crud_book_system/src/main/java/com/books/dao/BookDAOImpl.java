@@ -56,9 +56,34 @@ public class BookDAOImpl implements BookDAO {
 			
 			return pstmt.executeUpdate();
 		}
-		
 	}
 	
-	
-
+	@Override
+	public Book findByID(int bookId) throws SQLException {
+		String sql = "SELECT * FROM books WHERE id = ?";
+		try (
+			Connection conn = ConnectionPool.DBPool.getDBPool();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+		) {
+			pstmt.setInt(1, bookId);
+			
+			try (ResultSet rs = pstmt.executeQuery();) {
+				if (rs.next()) {
+					Book book = new Book(
+						rs.getInt("id"),
+						rs.getString("title"),
+						rs.getString("writerName"),
+						rs.getString("genre"),
+						rs.getString("publisher"),
+						rs.getString("summary"),
+						rs.getInt("price"),
+						rs.getInt("totalPages"),
+						rs.getString("publishedAt")
+					);
+					return book;
+				}
+				return null;
+			}			
+		}
+	}
 }

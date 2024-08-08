@@ -8,4 +8,5 @@ import com.books.model.Book;
 public interface BookDAO {
 	List<Book> findAll() throws SQLException;
 	int insert(Book book) throws SQLException;
+	Book findByID(int bookId) throws SQLException;
 }
