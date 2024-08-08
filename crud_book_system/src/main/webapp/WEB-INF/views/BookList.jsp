@@ -9,6 +9,15 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
 .card-img-top {
 	height: 200px;
 	object-fit: cover;
@@ -94,7 +103,7 @@
 											<strong>내용:</strong> ${book.getSummary()}
 										</p>
 									</c:if>
-									<a href="/books?id=${book.getId()}" class="btn btn-primary">자세히
+									<a href="/books/view?id=${book.getId()}" class="btn btn-primary">자세히
 										보기</a>
 								</div>
 							</div>
