@@ -11,15 +11,11 @@ public class AddController implements BookController {
 	@Override
 	public void process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String reqMethod = req.getMethod();
-		String action = req.getParameter("action");
 		
 		if (reqMethod.equals("POST")) {
-			System.out.println(req.getPart("title"));
-			System.out.println(req.getPart("writerName"));
-//			bs.addBook(req);
-//			res.sendRedirect("/books/list");
+			bs.addBook(req);
 		}
-		else if (reqMethod.equals("GET") && action == null) {
+		else if (reqMethod.equals("GET")) {
 			req.getRequestDispatcher("/WEB-INF/views/BookRegister.jsp").forward(req, res);			
 		}
 	}

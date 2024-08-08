@@ -14,7 +14,7 @@ public class Book {
 	private LocalDate publishedAt;
 	
 	public Book(String title, String writerName, String genre, String publisher, String summary, int price,
-			int totalPages) {
+			int totalPages, LocalDate publishedAt) {
 		super();
 		this.title = title;
 		this.writerName = writerName;
@@ -23,6 +23,7 @@ public class Book {
 		this.summary = summary;
 		this.price = price;
 		this.totalPages = totalPages;
+		this.publishedAt = publishedAt;
 	}
 	
 	

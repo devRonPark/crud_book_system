@@ -7,6 +7,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 public class TypeConverter {
+	// LocalDate.parse() 메소드: convert from string to localdate
+	public static LocalDate stringToLocalDate(String localDateString) {
+		return LocalDate.parse(localDateString);
+	}
 	public static LocalDate timeStampToLocalDate(Timestamp timestamp) {
 		return timestamp.toLocalDateTime().toLocalDate();
 	}
@@ -20,4 +24,5 @@ public class TypeConverter {
         // Convert Instant to Timestamp
         return Timestamp.from(instant); 
 	}
+	
 }

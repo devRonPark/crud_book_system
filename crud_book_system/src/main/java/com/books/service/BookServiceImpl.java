@@ -11,6 +11,7 @@ import org.apache.coyote.BadRequestException;
 import com.books.dao.BookDAO;
 import com.books.dao.BookDAOImpl;
 import com.books.model.Book;
+import com.books.util.TypeConverter;
 
 public class BookServiceImpl implements BookService {
 	private BookDAO bookDAO = new BookDAOImpl();
@@ -24,13 +25,14 @@ public class BookServiceImpl implements BookService {
 	public void addBook(HttpServletRequest req) throws SQLException {
 		String title = req.getParameter("title");
 		String writerName = req.getParameter("writerName");
-		String genre = req.getParameter("genre");
-		String publisher = req.getParameter("publisher");
-		String summary = req.getParameter("summary");
+		String genre = req.getParameter("genre") != null ? req.getParameter("genre") : null;
+		String publisher = req.getParameter("publisher") != null ? req.getParameter("publisher") : null;
+		String summary = req.getParameter("summary") != null ? req.getParameter("summary") : null;
 		int price = Integer.parseInt(req.getParameter("price"));
 		int totalPages = Integer.parseInt(req.getParameter("totalPages"));
+		LocalDate publishedAt = TypeConverter.stringToLocalDate(req.getParameter("publishedAt"));
 		
-		Book newBook = new Book(title, writerName, genre, publisher, summary, price, totalPages);
+		Book newBook = new Book(title, writerName, genre, publisher, summary, price, totalPages, publishedAt);
 		
 		int resultRow = bookDAO.insert(newBook);
 		if (resultRow <= 0) throw new SQLException("새로운 책 추가 실패");
@@ -62,8 +64,8 @@ public class BookServiceImpl implements BookService {
 		String summary = req.getParameter("summary") != null ? req.getParameter("summary") : null;
 		int price = Integer.parseInt(req.getParameter("price"));
 		int totalPages = Integer.parseInt(req.getParameter("totalPages"));
-		// LocalDate.parse() 메소드: convert from string to localdate
-		LocalDate publishedAt = LocalDate.parse(req.getParameter("publishedAt"));
+		
+		LocalDate publishedAt = TypeConverter.stringToLocalDate(req.getParameter("publishedAt"));
 		
 		book.setTitle(title);
 		book.setWriterName(writerName);

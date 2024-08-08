@@ -132,7 +132,7 @@ s</style>
             </div>
             <div class="mb-3">
             	<label for="publishedAt" class="form-label">출판일</label>
-            	<input type="date" class="form-control" id="publishedAt" name="publishedAt" value="${book.getPublishedAt().toString()}">
+            	<input type="date" class="form-control" id="publishedAt" name="publishedAt" min="1900-01-01" max="2024-08-08" value="${book.getPublishedAt().toString()}">
         	</div>
         	<div class="mb-3">
                 <label for="price" class="form-label">가격</label>
