@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>도서 목록</title>
+<title>도서 검색 결과</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -91,11 +91,6 @@ body {
 		</div>
 	</nav>
 	<div class="container mt-4">
-		<!-- 도서 등록 버튼 -->
-		<div class="d-flex justify-content-end mb-3">
-			<a href="/books/add" class="btn btn-primary btn-add-book">도서 등록</a>
-		</div>
-
 		<!-- 검색 및 필터 -->
 		<div
 			class="filter-container d-flex flex-column flex-sm-row justify-content-between align-items-center mb-4">
@@ -108,21 +103,13 @@ body {
 					aria-label="Search" name="keyword">
 				<button id="search-btn" class="btn btn-outline-success" type="submit">검색</button>
 			</form>
-			<div class="d-flex mt-3 mt-sm-0">
-				<select class="form-select ms-2" aria-label="Default select example">
-					<option selected>필터 선택</option>
-					<option value="1">가격 낮은 순</option>
-					<option value="2">가격 높은 순</option>
-					<option value="3">출판일 최신 순</option>
-				</select>
-			</div>
 		</div>
 
 		<!-- 도서 목록 카드 -->
 		<div class="row">
 			<c:choose>
-				<c:when test="${not empty bookList}">
-					<c:forEach var="book" items="${bookList}">
+				<c:when test="${not empty searchResult}">
+					<c:forEach var="book" items="${searchResult}">
 						<div class="col-12 mb-4">
 							<div class="card">
 								<div class="card-body">
@@ -150,7 +137,7 @@ body {
 				</c:when>
 				<c:otherwise>
 					<div class="no-books-msg">
-						<p>등록된 도서가 없습니다.</p>
+						<p>검색된 도서가 없습니다.</p>
 					</div>
 				</c:otherwise>
 			</c:choose>
@@ -177,20 +164,6 @@ body {
 				</li>
 			</ul>
 		</nav>
-		
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="me-auto">알림</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                    삭제 성공하셨습니다.
-                </div>
-            </div>
-        </div>
 	</div>
-	
-	<script src="/showDeleteMsg.js"></script>
 </body>
 </html>

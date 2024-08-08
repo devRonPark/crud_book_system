@@ -23,6 +23,7 @@ public class BookServlet extends HttpServlet {
         controllerMap.put("/books/edit", new EditController());
         controllerMap.put("/books/delete", new DeleteController());
         controllerMap.put("/books/view", new ViewController());
+        controllerMap.put("/books/search", new SearchController());
     }
 
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

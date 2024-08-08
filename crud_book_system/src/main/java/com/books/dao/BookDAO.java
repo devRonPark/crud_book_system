@@ -11,4 +11,5 @@ public interface BookDAO {
 	Book findByID(int bookId) throws SQLException;
 	int update(Book book) throws SQLException;
 	int softDelete(int bookId) throws SQLException;
+	List<Book> findAllByWord(String keyword) throws SQLException;
 }

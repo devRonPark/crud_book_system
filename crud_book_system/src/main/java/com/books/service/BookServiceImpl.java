@@ -92,4 +92,12 @@ public class BookServiceImpl implements BookService {
 		if (resultRow <= 0) throw new SQLException("책 정보 삭제 실패");
 	}
 
+	@Override
+	public List<Book> searchBookListByKeyword(HttpServletRequest req) throws Exception {
+		String keyword = req.getParameter("keyword");
+		System.out.println(keyword);
+		
+		return bookDAO.findAllByWord(keyword);
+	}
+
 }

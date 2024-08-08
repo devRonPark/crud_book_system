@@ -3,7 +3,6 @@ package com.books.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.books.dao.BookDAO;
 import com.books.model.Book;
 import com.books.service.BookService;
 import com.books.service.BookServiceImpl;

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import com.books.model.Book;
 import com.books.util.ConnectionPool;
@@ -120,5 +121,38 @@ public class BookDAOImpl implements BookDAO {
 			
 			return pstmt.executeUpdate();
 		}
+	}
+
+	@Override
+	public List<Book> findAllByWord(String keyword) throws SQLException {
+		String sql = "SELECT * FROM books WHERE deletedAt is null AND (title LIKE ? OR writerName LIKE ? OR genre LIKE ? OR publisher LIKE ? OR summary OR ?)";
+		String searchCondStr = "%" + keyword + "%";
+		try (
+			Connection conn = ConnectionPool.DBPool.getDBPool();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+		) {
+			for (int i = 1; i < 6; i++) {
+				pstmt.setString(i, searchCondStr);
+			}
+			
+			try (ResultSet rs = pstmt.executeQuery();) {
+				List<Book> bookList = new ArrayList<>();
+				while (rs.next()) {
+					Book book = new Book(
+						rs.getInt("id"),
+						rs.getString("title"),
+						rs.getString("writerName"),
+						rs.getString("genre"),
+						rs.getString("publisher"),
+						rs.getString("summary"),
+						rs.getInt("price"),
+						rs.getInt("totalPages"),
+						TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt"))
+					);
+					bookList.add(book);
+				}
+				return bookList;				
+			}
+	    }
 	}
 }
