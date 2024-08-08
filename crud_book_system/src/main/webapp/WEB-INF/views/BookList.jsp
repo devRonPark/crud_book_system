@@ -16,7 +16,6 @@
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
 <style>
-<<<<<<< HEAD
 body {
 	padding-top: 70px; /* 네비게이션 바 높이만큼 패딩 추가 */
 }
@@ -27,15 +26,13 @@ body {
 	width: 100%;
 	z-index: 1000;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-=======
+}
 .card {
     transition: transform 0.3s, box-shadow 0.3s;
 }
-
 .card:hover {
     transform: scale(1.02);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
->>>>>>> feat/bookDetail
 }
 
 .card-img-top {
@@ -88,10 +85,9 @@ body {
 <body>
 	<nav class="navbar navbar-expand-lg mt-4">
 		<div class="container">
-			<a class="navbar-brand mx-auto" href="/books/list">BookManager</a>
+			<a class="navbar-brand mx-auto" href="/books/list">Book Manager</a>
 		</div>
 	</nav>
-
 	<div class="container mt-4">
 		<!-- 도서 등록 버튼 -->
 		<div class="d-flex justify-content-end mb-3">

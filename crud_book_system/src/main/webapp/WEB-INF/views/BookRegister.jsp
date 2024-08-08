@@ -95,7 +95,7 @@ s</style>
 <body>
 	<nav class="navbar navbar-expand-lg mt-4">
 		<div class="container">
-			<a class="navbar-brand mx-auto" href="/books/list">BookManager</a>
+			<a class="navbar-brand mx-auto" href="/books/list">Book Manager</a>
 		</div>
 	</nav>
 

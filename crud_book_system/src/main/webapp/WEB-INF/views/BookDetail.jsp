@@ -18,6 +18,18 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <style>
+body {
+	padding-top: 70px;
+}
+
+.navbar {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .book-card {
 	border-radius: 15px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -87,6 +99,12 @@
 </style>
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg mt-4">
+		<div class="container">
+			<a class="navbar-brand mx-auto" href="/books/list">Book Manager</a>
+		</div>
+	</nav>
+	
 	<div class="container my-5">
 		<!-- 도서 상세정보 카드 -->
 		<div class="row justify-content-center">
