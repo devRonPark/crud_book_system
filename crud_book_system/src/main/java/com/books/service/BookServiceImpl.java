@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.coyote.BadRequestException;
+
 import com.books.dao.BookDAO;
 import com.books.dao.BookDAOImpl;
 import com.books.model.Book;
@@ -42,6 +44,34 @@ public class BookServiceImpl implements BookService {
 		book.setPublishedAt(book.getPublishedAt().substring(0, 10).replace("-", ". "));
 		
 		return book;
+	}
+
+	@Override
+	public void editBook(HttpServletRequest req) throws Exception {
+		int id = Integer.parseInt(req.getParameter("id"));
+		Book book = bookDAO.findByID(id);
+		if (book == null) {
+			throw new BadRequestException("id 에 해당하는 책 정보가 존재하지 않습니다.");
+		}
+		
+		String title = req.getParameter("title");
+		String writerName = req.getParameter("writerName");
+		String genre = req.getParameter("genre") != null ? req.getParameter("genre") : null;
+		String publisher = req.getParameter("publisher") != null ? req.getParameter("publisher") : null;
+		String summary = req.getParameter("summary") != null ? req.getParameter("summary") : null;
+		int price = Integer.parseInt(req.getParameter("price"));
+		int totalPages = Integer.parseInt(req.getParameter("totalPages"));
+		
+		book.setTitle(title);
+		book.setWriterName(writerName);
+		book.setGenre(genre);
+		book.setPublisher(publisher);
+		book.setSummary(summary);
+		book.setPrice(price);
+		book.setTotalPages(totalPages);
+		
+		int resultRow = bookDAO.update(book);
+		if (resultRow <= 0) throw new SQLException("책 정보 업데이트 실패");
 	}
 
 }

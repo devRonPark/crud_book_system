@@ -9,4 +9,5 @@ public interface BookDAO {
 	List<Book> findAll() throws SQLException;
 	int insert(Book book) throws SQLException;
 	Book findByID(int bookId) throws SQLException;
+	int update(Book book) throws SQLException;
 }

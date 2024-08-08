@@ -1,5 +1,7 @@
 package com.books.model;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

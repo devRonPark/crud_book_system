@@ -130,7 +130,7 @@ body {
 									<p class="card-text">
 										<strong>가격:</strong> ${book.getPrice()}원
 									</p>
-									<c:if test="${book.getSummary() != null}">
+									<c:if test="${book.getSummary() != null || book.getSummary().trim().equals('')}">
 										<p class="card-text">
 											<strong>내용:</strong> ${book.getSummary()}
 										</p>
