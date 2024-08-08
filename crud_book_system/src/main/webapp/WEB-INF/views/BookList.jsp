@@ -6,9 +6,28 @@
 <head>
 <meta charset="UTF-8">
 <title>도서 목록</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
 <style>
+body {
+	padding-top: 70px; /* 네비게이션 바 높이만큼 패딩 추가 */
+}
+
+.navbar {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .card-img-top {
 	height: 200px;
 	object-fit: cover;
@@ -43,14 +62,30 @@
 	justify-content: center;
 	margin-top: 20px;
 }
+
+.navbar-brand {
+	font-weight: bold;
+	font-size: 1.5rem;
+	cursor: pointer;
+}
+
+.navbar-nav {
+	margin-left: auto;
+	margin-right: auto;
+}
 </style>
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg mt-4">
+		<div class="container">
+			<a class="navbar-brand mx-auto" href="/books/list">BookManager</a>
+		</div>
+	</nav>
+
 	<div class="container mt-4">
 		<!-- 도서 등록 버튼 -->
 		<div class="d-flex justify-content-end mb-3">
-			<a href="registerBook.jsp" class="btn btn-primary btn-add-book">도서
-				등록</a>
+			<a href="/books/add" class="btn btn-primary btn-add-book">도서 등록</a>
 		</div>
 
 		<!-- 검색 및 필터 -->

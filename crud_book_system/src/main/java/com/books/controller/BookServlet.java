@@ -17,7 +17,7 @@ public class BookServlet extends HttpServlet {
        
     public BookServlet() {
         controllerMap.put("/books/list", new ListController());
-        controllerMap.put("/books.add", new AddController());
+        controllerMap.put("/books/add", new AddController());
         controllerMap.put("/books/edit", new EditController());
         controllerMap.put("/books/delete", new DeleteController());
         controllerMap.put("/books/view", new ViewController());
