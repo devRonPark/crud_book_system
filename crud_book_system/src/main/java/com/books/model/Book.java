@@ -25,6 +25,4 @@ public class Book {
 		this.totalPages = totalPages;
 		this.publishedAt = publishedAt;
 	}
-	
-	
 }

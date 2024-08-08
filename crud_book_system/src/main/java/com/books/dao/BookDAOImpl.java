@@ -15,7 +15,7 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public List<Book> findAll() throws SQLException {
-		String sql = "SELECT * FROM books";
+		String sql = "SELECT * FROM books WHERE deletedAt is null";
 		try (
 			Connection conn = ConnectionPool.DBPool.getDBPool();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -90,7 +90,7 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public int update(Book book) throws SQLException {
-		String sql = "UPDATE books SET title = ?, writerName = ?, genre = ?, publisher = ?, summary = ?, price = ?, totalPages = ?, publishedAt = ? WHERE id = ?";
+		String sql = "UPDATE books SET title = ?, writerName = ?, genre = ?, publisher = ?, summary = ?, price = ?, totalPages = ?, publishedAt = ? WHERE id = ? AND deletedAt is null";
 		try (
 			Connection conn = ConnectionPool.DBPool.getDBPool();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -104,6 +104,19 @@ public class BookDAOImpl implements BookDAO {
 			pstmt.setInt(7, book.getTotalPages());
 			pstmt.setTimestamp(8, TypeConverter.localDateToTimestamp(book.getPublishedAt()));
 			pstmt.setInt(9, book.getId());
+			
+			return pstmt.executeUpdate();
+		}
+	}
+
+	@Override
+	public int softDelete(int bookId) throws SQLException {
+		String sql = "UPDATE books SET deletedAt = NOW() WHERE id = ?";
+		try (
+			Connection conn = ConnectionPool.DBPool.getDBPool();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+		) {
+			pstmt.setInt(1, bookId);
 			
 			return pstmt.executeUpdate();
 		}

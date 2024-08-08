@@ -17,6 +17,7 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Axios CDN 추가 -->
 <style>
 body {
 	padding-top: 70px;
@@ -138,11 +139,32 @@ body {
 					</div>
 					<div class="card-footer book-card-footer">
 						<a href="/books/edit?id=${book.id}" class="btn btn-warning">수정</a>
-						<a href="/books/delete?id=${book.id}" class="btn btn-danger">삭제</a>
+						<a id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">삭제</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+		<!-- 삭제 확인 모달 -->
+	<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="confirmDeleteModalLabel">삭제 확인</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>정말로 이 도서를 삭제하시겠습니까?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					<a id="confirm-delete-btn" class="btn btn-danger">삭제</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="/bookDelete.js"></script>
 </body>
 </html>

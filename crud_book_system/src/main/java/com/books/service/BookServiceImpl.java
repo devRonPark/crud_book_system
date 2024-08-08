@@ -80,4 +80,16 @@ public class BookServiceImpl implements BookService {
 		if (resultRow <= 0) throw new SQLException("책 정보 업데이트 실패");
 	}
 
+	@Override
+	public void deleteBook(HttpServletRequest req) throws Exception {
+		int id = Integer.parseInt(req.getParameter("id"));
+		Book book = bookDAO.findByID(id);
+		if (book == null) {
+			throw new BadRequestException("id 에 해당하는 책 정보가 존재하지 않습니다.");
+		}
+		
+		int resultRow = bookDAO.softDelete(id);
+		if (resultRow <= 0) throw new SQLException("책 정보 삭제 실패");
+	}
+
 }

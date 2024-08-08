@@ -10,4 +10,5 @@ public interface BookDAO {
 	int insert(Book book) throws SQLException;
 	Book findByID(int bookId) throws SQLException;
 	int update(Book book) throws SQLException;
+	int softDelete(int bookId) throws SQLException;
 }

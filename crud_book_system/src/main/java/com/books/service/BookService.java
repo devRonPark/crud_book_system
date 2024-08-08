@@ -12,4 +12,5 @@ public interface BookService {
 	void addBook(HttpServletRequest req) throws SQLException;
 	Book getBookDetail(HttpServletRequest req) throws Exception;
 	void editBook(HttpServletRequest req) throws Exception;
+	void deleteBook(HttpServletRequest req) throws Exception;
 }
