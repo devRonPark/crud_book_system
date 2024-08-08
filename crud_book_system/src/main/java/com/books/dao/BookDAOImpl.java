@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import com.books.model.Book;
+import com.books.model.BookPage;
 import com.books.util.ConnectionPool;
 import com.books.util.TypeConverter;
 
@@ -154,5 +155,39 @@ public class BookDAOImpl implements BookDAO {
 				return bookList;				
 			}
 	    }
+	}
+
+	@Override
+	public BookPage findAllByPage(int page) throws SQLException {
+		int limit = 10;
+		int offset = (page - 1) * 10;
+		String sql = "SELECT b.*, floor(Count(*) OVER () / 10) + 1 AS totalBookListPages FROM books b WHERE b.deletedAt is null ORDER BY b.publishedAt DESC LIMIT 10 OFFSET ?";
+		try (
+			Connection conn = ConnectionPool.DBPool.getDBPool();
+			PreparedStatement pstmt = conn.prepareStatement(sql);	
+		) {
+			pstmt.setInt(1, offset);
+			
+			try (ResultSet rs = pstmt.executeQuery();) {
+				List<Book> bookList = new ArrayList<>();
+				int totalBookListPages = 0;
+				while (rs.next()) {
+					Book book = new Book(
+						rs.getInt("id"),
+						rs.getString("title"),
+						rs.getString("writerName"),
+						rs.getString("genre"),
+						rs.getString("publisher"),
+						rs.getString("summary"),
+						rs.getInt("price"),
+						rs.getInt("totalPages"),
+						TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt"))
+					);
+					totalBookListPages = rs.getInt("totalBookListPages");
+					bookList.add(book);
+				}	
+				return new BookPage(bookList, totalBookListPages);
+			}	
+		}
 	}
 }

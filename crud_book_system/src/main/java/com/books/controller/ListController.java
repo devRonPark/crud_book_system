@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.books.model.Book;
+import com.books.model.BookPage;
 import com.books.service.BookService;
 import com.books.service.BookServiceImpl;
 
@@ -14,11 +15,22 @@ public class ListController implements BookController {
 	
 	@Override
 	public void process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		System.out.println("도서 목록 조회");
-		List<Book> bookList = bs.getBookList();
-		
+		String pageStr = req.getParameter("page");
+		BookPage bookPage = null;
+		List<Book> bookList = null;
+		// 페지네이션 처리
+		if (pageStr != null) {
+			bookPage = bs.getBookListByPage(Integer.parseInt(pageStr));
+			bookList = bookPage.getBooks();
+		}
+		else {
+			// 기본값은 page: 1일 때,
+			bookPage = bs.getBookListByPage(0);
+			bookList = bookPage.getBooks();
+		}
+		int totalPages = bookPage.getTotalPages();
+		req.setAttribute("totalPages", totalPages);
 		req.setAttribute("bookList", bookList);
-		req.getRequestDispatcher("/WEB-INF/views/BookList.jsp").forward(req, res);
+		req.getRequestDispatcher("/WEB-INF/views/BookList.jsp").forward(req, res);			
 	}
-
 }

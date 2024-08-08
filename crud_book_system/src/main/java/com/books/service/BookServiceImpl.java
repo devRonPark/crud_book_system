@@ -11,6 +11,7 @@ import org.apache.coyote.BadRequestException;
 import com.books.dao.BookDAO;
 import com.books.dao.BookDAOImpl;
 import com.books.model.Book;
+import com.books.model.BookPage;
 import com.books.util.TypeConverter;
 
 public class BookServiceImpl implements BookService {
@@ -98,6 +99,11 @@ public class BookServiceImpl implements BookService {
 		System.out.println(keyword);
 		
 		return bookDAO.findAllByWord(keyword);
+	}
+
+	@Override
+	public BookPage getBookListByPage(int page) throws Exception {
+		return bookDAO.findAllByPage(page);
 	}
 
 }
