@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.books.model.Book;
 import com.books.util.ConnectionPool;
+import com.books.util.TimestampConverter;
 
 public class BookDAOImpl implements BookDAO {
 
@@ -31,7 +32,7 @@ public class BookDAOImpl implements BookDAO {
 					rs.getString("summary"),
 					rs.getInt("price"),
 					rs.getInt("totalPages"),
-					rs.getString("publishedAt")
+					TimestampConverter.toLocalDate(rs.getTimestamp("publishedAt"))
 				);
 				bookList.add(book);
 			}
@@ -78,7 +79,7 @@ public class BookDAOImpl implements BookDAO {
 						rs.getString("summary"),
 						rs.getInt("price"),
 						rs.getInt("totalPages"),
-						rs.getString("publishedAt")
+						TimestampConverter.toLocalDate(rs.getTimestamp("publishedAt"))
 					);
 					return book;
 				}

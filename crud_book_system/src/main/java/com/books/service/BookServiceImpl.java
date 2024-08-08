@@ -41,7 +41,7 @@ public class BookServiceImpl implements BookService {
 		// id parameter 에 대한 유효성 검사
 		if (bookId < 0) throw new Exception("id is invalid value");
 		Book book = bookDAO.findByID(bookId);
-		book.setPublishedAt(book.getPublishedAt().substring(0, 10).replace("-", ". "));
+		book.setPublishedAt(book.getPublishedAt());
 		
 		return book;
 	}

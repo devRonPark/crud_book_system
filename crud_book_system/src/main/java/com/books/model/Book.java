@@ -1,6 +1,6 @@
 package com.books.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ public class Book {
 	private int id;
 	private String title, writerName, genre, publisher, summary;
 	private int price, totalPages;
-	private String publishedAt;
+	private LocalDate publishedAt;
 	
 	public Book(String title, String writerName, String genre, String publisher, String summary, int price,
 			int totalPages) {
