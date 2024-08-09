@@ -25,10 +25,12 @@ public class ListController implements BookController {
 		}
 		else {
 			// 기본값은 page: 1일 때,
-			bookPage = bs.getBookListByPage(0);
+			bookPage = bs.getBookListByPage(1);
 			bookList = bookPage.getBooks();
 		}
 		int totalPages = bookPage.getTotalPages();
+		
+		req.setAttribute("currentPage", pageStr != null ? Integer.parseInt(pageStr) : 1);		
 		req.setAttribute("totalPages", totalPages);
 		req.setAttribute("bookList", bookList);
 		req.getRequestDispatcher("/WEB-INF/views/BookList.jsp").forward(req, res);			

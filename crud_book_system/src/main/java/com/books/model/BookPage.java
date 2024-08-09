@@ -9,6 +9,6 @@ import lombok.Getter;
 @Getter
 public class BookPage {
     private List<Book> books;
-    private int totalPages;
+    private int totalPages, currentPage;
 }
 

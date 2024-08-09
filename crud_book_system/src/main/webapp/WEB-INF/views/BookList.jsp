@@ -162,10 +162,10 @@ body {
 				<li class="page-item <c:if test="${page == 1}">disabled</c:if>">
 					<a class="page-link" href="?page=${page - 1}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
-				</a>
+					</a>
 				</li>
 				<c:forEach var="i" begin="1" end="${totalPages}">
-					<li class="page-item <c:if test="${i == page}">active</c:if>">
+					<li class="page-item <c:if test="${i == currentPage}">active</c:if>">
 						<a class="page-link" href="?page=${i}">${i}</a>
 					</li>
 				</c:forEach>

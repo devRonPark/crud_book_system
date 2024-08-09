@@ -186,7 +186,7 @@ public class BookDAOImpl implements BookDAO {
 					totalBookListPages = rs.getInt("totalBookListPages");
 					bookList.add(book);
 				}	
-				return new BookPage(bookList, totalBookListPages);
+				return new BookPage(bookList, totalBookListPages, page);
 			}	
 		}
 	}
