@@ -11,7 +11,7 @@ import com.books.model.BookPage;
 public interface BookService {
 	List<Book> getBookList() throws SQLException;
 	BookPage getBookListByPage(int page) throws Exception;
-	void addBook(HttpServletRequest req) throws SQLException;
+	void addBook(HttpServletRequest req) throws Exception;
 	Book getBookDetail(HttpServletRequest req) throws Exception;
 	void editBook(HttpServletRequest req) throws Exception;
 	void deleteBook(HttpServletRequest req) throws Exception;

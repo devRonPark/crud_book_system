@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/books/*")
-@MultipartConfig
+@MultipartConfig(maxFileSize = 1024 * 1024 * 2, location="C:\\Users\\WD\\Desktop\\project\\thumbnail")
 public class BookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Map<String, BookController> controllerMap = new HashMap<>();

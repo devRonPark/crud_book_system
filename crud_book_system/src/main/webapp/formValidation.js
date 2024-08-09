@@ -55,18 +55,27 @@ window.addEventListener("DOMContentLoaded", () => {
         }
 
         if (valid) {
-            document.getElementById('success-message').style.display = 'block';
-			
-			const formData = {
-				id: parseInt(bookId), 
-				title: form.title.value.trim(), 
-				writerName: form.writerName.value.trim(),
-				genre: form.genre.value.trim() != "" ? form.genre.value.trim() : null,
-				publisher: form.publisher.value.trim() != "" ? form.publisher.value.trim() : null,
-				summary: form.summary.value.trim() != "" ? form.summary.value.trim() : null,
-				price: parseInt(form.price.value.trim()) > 0 ? parseInt(form.price.value.trim()) : 0,
-				totalPages: parseInt(form.totalPages.value.trim()),
-				publishedAt: form.publishedAt.value
+			// FormData 객체 생성
+			const formData = new FormData();
+
+			// 파일 인풋에서 파일 객체 가져오기
+			const fileInput = document.getElementById('thumbnail');
+			const file = fileInput.files[0];
+
+			// FormData 객체에 필드 값 추가
+			formData.append('id', parseInt(bookId)); 
+			formData.append('title', form.title.value.trim()); 
+			formData.append('writerName', form.writerName.value.trim());
+			formData.append('genre', form.genre.value.trim() !== "" ? form.genre.value.trim() : null);
+			formData.append('publisher', form.publisher.value.trim() !== "" ? form.publisher.value.trim() : null);
+			formData.append('summary', form.summary.value.trim() !== "" ? form.summary.value.trim() : null);
+			formData.append('price', parseInt(form.price.value.trim()) > 0 ? parseInt(form.price.value.trim()) : 0);
+			formData.append('totalPages', parseInt(form.totalPages.value.trim()));
+			formData.append('publishedAt', form.publishedAt.value);
+
+			// 썸네일 파일을 FormData에 추가
+			if (file) {
+			    formData.append('thumbnail', file);
 			}
 			
 			axios.post(postReqURL, formData, { headers: {
@@ -75,7 +84,7 @@ window.addEventListener("DOMContentLoaded", () => {
 			.then(response => {
 				if (response.status == 200) {
 					if (pathname.includes("add")) {
-						window.location.href = "/books/list";
+						// window.location.href = "/books/list";
 					} else if (pathname.includes("edit")) {
 						window.location.href = "/books/view?id=" + bookId;
 					}					

@@ -136,7 +136,7 @@ s</style>
         	</div>
         	<div class="mb-3">
                 <label for="price" class="form-label">가격</label>
-                <input type="number" class="form-control" id="price" name="price" min="0" step="0.01">
+                <input type="number" class="form-control" id="price" name="price" min="0" step="10" value="${book.getPrice()}">
                 <div class="invalid-feedback">올바른 가격을 입력해 주세요.</div>
             </div>
             <div class="mb-3">
@@ -148,6 +148,11 @@ s</style>
                 <label for="summary" class="form-label">주요 내용</label>
                 <textarea class="form-control" id="summary" name="summary" rows="4"></textarea>
                 <div class="invalid-feedback">주요 내용을 입력해 주세요.</div>
+            </div>
+            <div class="mb-3">
+                <label for="summary" class="form-label">썸네일 이미지</label>
+                <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept=".jpg, .jpeg, .png">
+                <div class="invalid-feedback">.jpg, .jpeg, .png 확장자만 첨부 가능합니다.</div>
             </div>
             
 			<button type="submit" class="btn btn-primary w-100">등록하기</button>

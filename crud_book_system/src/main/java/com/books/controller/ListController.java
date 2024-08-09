@@ -16,6 +16,11 @@ public class ListController implements BookController {
 	@Override
 	public void process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String pageStr = req.getParameter("page");
+		// 가격 높은 순: priceDesc (Price Descending)
+		// 가격 낮은 순: priceAsc (Price Ascending)
+		// 출판일 최신 순: publicatedAtDesc (Publication Date Descending)
+		String filterParam = req.getParameter("filter");
+		
 		BookPage bookPage = null;
 		List<Book> bookList = null;
 		// 페지네이션 처리

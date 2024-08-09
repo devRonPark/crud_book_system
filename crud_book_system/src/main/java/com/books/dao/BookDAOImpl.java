@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import com.books.model.Book;
 import com.books.model.BookPage;
@@ -34,7 +33,8 @@ public class BookDAOImpl implements BookDAO {
 					rs.getString("summary"),
 					rs.getInt("price"),
 					rs.getInt("totalPages"),
-					TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt"))
+					TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt")),
+					rs.getString("thumbnail")
 				);
 				bookList.add(book);
 			}
@@ -81,7 +81,8 @@ public class BookDAOImpl implements BookDAO {
 						rs.getString("summary"),
 						rs.getInt("price"),
 						rs.getInt("totalPages"),
-						TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt"))
+						TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt")),
+						rs.getString("thumbnail")
 					);
 					return book;
 				}
@@ -148,7 +149,8 @@ public class BookDAOImpl implements BookDAO {
 						rs.getString("summary"),
 						rs.getInt("price"),
 						rs.getInt("totalPages"),
-						TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt"))
+						TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt")),
+						rs.getString("thumbnail")
 					);
 					bookList.add(book);
 				}
@@ -181,7 +183,8 @@ public class BookDAOImpl implements BookDAO {
 						rs.getString("summary"),
 						rs.getInt("price"),
 						rs.getInt("totalPages"),
-						TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt"))
+						TypeConverter.timeStampToLocalDate(rs.getTimestamp("publishedAt")),
+						rs.getString("thumbnail")
 					);
 					totalBookListPages = rs.getInt("totalBookListPages");
 					bookList.add(book);
